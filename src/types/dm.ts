@@ -1,5 +1,7 @@
 export type DmConversationState = 'active' | 'request' | 'left';
 
+export type DmParticipantState = 'active' | 'request' | 'left';
+
 export type DmMessageType = 'text' | 'loop_share' | 'media';
 
 export type DmMediaType = 'image' | 'video' | 'gif' | 'audio' | 'unknown';
@@ -13,6 +15,7 @@ export interface DmParticipant {
     avatar: string | null;
     domain: string | null;
     is_remote: boolean;
+    state?: DmParticipantState;
 }
 
 export interface DmMediaEntity {
@@ -60,6 +63,7 @@ export interface DmMessage {
     sender_id: string;
     type: DmMessageType;
     body: string | null;
+    video_id?: string | null;
     video?: DmSharedVideo;
     media: DmMediaEntity[];
     created_at: string;
@@ -86,6 +90,9 @@ export interface DmConversation {
     participant: DmParticipant | null;
     last_message: DmMessage | null;
     updated_at: string | null;
+    type?: 'dm' | 'group';
+    title?: string | null;
+    participants?: DmParticipant[];
 }
 
 export interface DmSuggestedRecipient {

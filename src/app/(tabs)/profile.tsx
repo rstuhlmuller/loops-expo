@@ -191,6 +191,10 @@ export default function ProfileScreen() {
         router.push(`/private/studio`);
     };
 
+    const handleGoLivePress = () => {
+        router.push('/private/live/go')
+    }
+
     const handlePlaylistPress = useCallback(
         (playlist) => {
             router.push(`/private/video/playlist/${playlist.id}?playlistName=${playlist.name}`);
@@ -271,6 +275,20 @@ export default function ProfileScreen() {
                     </PressableHaptics>
 
                     <PressableHaptics
+                        theme="light"
+                        accessibilityLabel="Go live"
+                        accessibilityHint="Start a live broadcast"
+                        accessibilityRole="button"
+                        style={tw`mr-3`}
+                        onPress={handleGoLivePress}>
+                        <Ionicons
+                            name="radio-outline"
+                            size={25}
+                            color={colorScheme === 'dark' ? '#ccc' : '#333'}
+                        />
+                    </PressableHaptics>
+
+                    <PressableHaptics
                         accessibilityLabel="Settings"
                         accessibilityRole="button"
                         onPress={handleSettingsPress}
@@ -281,7 +299,7 @@ export default function ProfileScreen() {
                             color={colorScheme === 'dark' ? '#fff' : '#000'}
                         />
                     </PressableHaptics>
-                </XStack>
+                </XStack >
             ),
         }),
         [colorScheme],
