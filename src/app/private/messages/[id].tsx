@@ -2,7 +2,6 @@ import {
     conversationDisplayName,
     conversationMemberCount,
     conversationParticipants,
-    isGroupConversation,
 } from '@/components/dm/dmGroupHelpers';
 import { dmDisplayName, dmHandle } from '@/components/dm/dmHelpers';
 import { GroupInfoSheet } from '@/components/dm/GroupInfoSheet';
@@ -146,7 +145,7 @@ export default function ConversationScreen() {
     });
     const conversation = (conversationRaw?.data ?? conversationRaw) as DmConversation | undefined;
     const participant = conversation?.participant;
-    const isGroup = isGroupConversation(conversation);
+    const isGroup = conversation?.type === 'group';
     const isRequest = !!conversation?.pending_acceptance;
 
     const participantById = useMemo(() => {
