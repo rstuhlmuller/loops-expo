@@ -452,6 +452,7 @@ export default function ConversationScreen() {
         mutationFn: async () => dmLeaveGroup(id as string),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['dm', 'conversations'] });
+            setGroupInfoVisible(false);
             goBack();
         },
         onError: () => {
@@ -1029,10 +1030,8 @@ export default function ConversationScreen() {
                         visible={groupInfoVisible}
                         conversation={conversation}
                         onClose={() => setGroupInfoVisible(false)}
-                        onLeft={() => {
-                            setGroupInfoVisible(false);
-                            goBack();
-                        }}
+                        onLeave={confirmLeave}
+                        leaving={leaveMutation.isPending}
                         onOpenProfile={(profileId) => {
                             setGroupInfoVisible(false);
                             router.push(`/private/profile/${profileId}` as any);
