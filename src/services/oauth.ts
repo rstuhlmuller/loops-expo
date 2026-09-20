@@ -83,7 +83,7 @@ export class OAuthService {
      */
     private static async handleRegistrationCallback(url: string, server: string): Promise<boolean> {
         try {
-            console.log('Handling registration callback URL:', url);
+            console.log('Handling registration callback');
 
             const { queryParams } = Linking.parse(url);
 
@@ -173,7 +173,7 @@ export class OAuthService {
                 createTask: false,
             });
 
-            console.log('Auth result:', authResult);
+            console.log('Auth result:', authResult.type);
 
             if (authResult.type === 'success') {
                 return await this.handleCallback(authResult.url);
@@ -240,7 +240,7 @@ export class OAuthService {
      */
     private static async handleCallback(url: string): Promise<boolean> {
         try {
-            console.log('Handling callback URL:', url);
+            console.log('Handling OAuth callback');
 
             const { queryParams } = Linking.parse(url);
 
