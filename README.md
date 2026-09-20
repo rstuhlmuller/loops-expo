@@ -18,6 +18,20 @@ WIP
    npx expo start
    ```
 
+## Local iPhone development build
+
+Install Xcode and CocoaPods, add your Apple ID in Xcode, and connect your iPhone
+with Developer Mode enabled. Expo Go does not include the required native modules.
+
+```bash
+npm install
+IOS_DEV_BUNDLE_ID=com.yourname.loops.dev npm run ios:device
+```
+
+Select your Personal Team for signing. This creates **Loops Dev** without push or
+Apple Sign-In entitlements; use OAuth login. Save `IOS_DEV_BUNDLE_ID` in `.env.local`
+and use `npm run start:dev` for subsequent sessions. Rebuild after native dependency changes.
+
 ## Learn more
 
 To learn more about developing your project with Expo, look at the following resources:

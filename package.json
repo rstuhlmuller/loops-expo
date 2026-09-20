@@ -3,7 +3,9 @@
     "main": "expo-router/entry",
     "version": "1.0.0",
     "scripts": {
-        "postinstall": "node scripts/patch-api-video-livestream.js"
+        "postinstall": "node scripts/patch-api-video-livestream.js",
+        "start:dev": "APP_VARIANT=development expo start --dev-client",
+        "ios:device": "APP_VARIANT=development expo run:ios --device"
     },
     "dependencies": {
         "@api.video/react-native-livestream": "^2.0.2",
@@ -60,7 +62,8 @@
         "react-native-worklets-core": "^1.6.3",
         "twrnc": "^4.10.1",
         "victory-native": "^41.20.2",
-        "zustand": "^5.0.8"
+        "zustand": "^5.0.8",
+        "expo-dev-client": "~56.0.23"
     },
     "devDependencies": {
         "@react-native-community/cli": "latest",

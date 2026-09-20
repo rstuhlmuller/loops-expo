@@ -2,6 +2,7 @@ import { StackText, XStack } from '@/components/ui/Stack';
 import { useAuthStore } from '@/utils/authStore';
 import { openBrowser, registerPreflightCheck } from '@/utils/requests';
 import * as AppleAuthentication from 'expo-apple-authentication';
+import Constants from 'expo-constants';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -173,7 +174,7 @@ export default function SignInScreen() {
     };
 
     const AppleSignInButton = () => {
-        if (Platform.OS !== 'ios') {
+        if (Platform.OS !== 'ios' || Constants.expoConfig?.ios?.usesAppleSignIn === false) {
             return null;
         }
 
