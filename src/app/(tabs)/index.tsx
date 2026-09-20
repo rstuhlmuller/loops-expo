@@ -1,7 +1,9 @@
+import DownloadToast from '@/components/DownloadToast';
 import CommentsModal from '@/components/feed/CommentsModal';
 import FeedEmptyState from '@/components/feed/FeedEmptyState';
 import ShareModal from '@/components/feed/ShareModal';
 import VideoPlayer from '@/components/feed/VideoPlayer';
+import { useVideoDownload } from '@/hooks/useVideoDownload';
 import { useAuthStore } from '@/utils/authStore';
 import {
     fetchFollowingFeed,
@@ -159,6 +161,7 @@ export default function LoopsFeed({ navigation }) {
     });
 
     const videos = data?.pages?.flatMap((page) => page.data) || [];
+    const downloader = useVideoDownload();
     const onViewableItemsChanged = useCallback(
         ({ viewableItems }) => {
             if (viewableItems.length > 0) {
@@ -447,6 +450,14 @@ export default function LoopsFeed({ navigation }) {
                 currentPlaybackRate={
                     selectedVideo ? videoPlaybackRates[selectedVideo.id] || 1.0 : 1.0
                 }
+                onDownload={() => downloader.download(selectedVideo?.media?.src_url)}
+            />
+
+            <DownloadToast
+                status={downloader?.status}
+                progress={downloader?.progress}
+                error={downloader?.error}
+                onCancel={downloader?.cancel}
             />
         </View>
     );
