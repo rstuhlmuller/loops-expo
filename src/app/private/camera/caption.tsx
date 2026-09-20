@@ -1,7 +1,7 @@
 import Avatar from '@/components/Avatar';
 import { XStack, YStack } from '@/components/ui/Stack';
 import { useTheme } from '@/contexts/ThemeContext';
-import { prepareVideoForUpload } from '@/hooks/useProcessVideo';
+import { Video } from 'react-native-compressor';
 import {
     composeAutocompleteMentions,
     composeAutocompleteTags,
@@ -294,10 +294,15 @@ export default function CaptionScreen() {
         setOverlayMessage('Preparing… 0%');
         setProgressPct(0);
 
-        const compressedUri = await prepareVideoForUpload(originalPath, (pct) => {
-            setProgressPct(pct);
-            setOverlayMessage(`Preparing… ${pct}%`);
-        });
+        const compressedUri = await Video.compress(
+            originalPath,
+            { compressionMethod: 'auto' },
+            (progress) => {
+                const pct = Math.round(progress * 100);
+                setProgressPct(pct);
+                setOverlayMessage(`Preparing… ${pct}%`);
+            },
+        );
 
         const uploadUri = compressedUri.startsWith('file://')
             ? compressedUri
