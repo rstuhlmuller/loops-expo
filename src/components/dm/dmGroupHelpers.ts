@@ -1,9 +1,6 @@
 import type { DmConversation } from '@/types/dm';
 import { dmDisplayName } from './dmHelpers';
 
-export const isGroupConversation = (conversation?: DmConversation | null) =>
-    conversation?.type === 'group';
-
 export function conversationParticipants(conversation?: DmConversation | null) {
     return (
         conversation?.participants ?? (conversation?.participant ? [conversation.participant] : [])
